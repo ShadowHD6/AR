@@ -1,50 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
- <meta charset="UTF-8" />
- <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
- <title>Wajdi Sfar Work</title>
- <style>
-   * { box-sizing: border-box; }
-   body { margin: 0; font-family: Arial, sans-serif; background: #f5f5f5; color: #333; }
-   header { text-align: center; padding: 40px 0; background: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); position: sticky; top: 0; z-index: 10; }
-   header h1 { margin: 0; font-size: 2.5em; color: #000000; }
-   .container { max-width: 1200px; margin: 20px auto; display: flex; gap: 20px; flex-wrap: wrap; }
-   .filter-section { flex: 1; min-width: 200px; background: #fff; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border-radius: 8px; }
-   .toggle-options { background: none; border: none; font-size: 24px; cursor: pointer; color: #000000; display: flex; gap: 10px; }
-   .filter-list { margin-top: 15px; display: none; flex-direction: column; gap: 0px; }
-   .filter-list.show { display: flex; }
-   .filter-button { padding: 10px 15px; background: #e0f7fa; border-radius: 50px; cursor: pointer; text-align: center; font-weight: bold; color: #00796b; }
-   .filter-button.active { background: #00796b; color: #fff; }
-   .portfolio { flex: 3; min-width: 300px; background: #fff; padding: 20px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); border-radius: 8px; }
-   .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; }
-   .portfolio-item { background: #fafafa; border: 1px solid #ddd; border-radius: 6px; overflow: hidden; text-align: center; }
-   .portfolio-item img { width: 100%; height: auto; }
-   .portfolio-item p { margin: 10px 0; font-size: 0.9em; color: #555; }
-   @media (max-width: 768px) {
-     .container { flex-direction: column; }
-     .toggle-options { font-size: 20px; padding: 10px 0; }
-     .filter-button { font-size: 1.1em; }
-   }
- </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Wajdi Sfar Work</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      color: #333;
+    }
+    header {
+      text-align: center;
+      padding: 40px 0;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5em;
+      color: #000;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .filter-section {
+      flex: 1;
+      min-width: 200px;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .toggle-options {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: #000;
+      display: flex;
+      gap: 10px;
+    }
+    .filter-list {
+      margin-top: 15px;
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .filter-list.show {
+      display: flex;
+    }
+    .filter-button {
+      padding: 10px 15px;
+      background: #e0f7fa;
+      border-radius: 50px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      color: #00796b;
+    }
+    .filter-button.active {
+      background: #00796b;
+      color: #fff;
+    }
+    #imageCount {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .portfolio {
+      flex: 3;
+      min-width: 300px;
+      background: #fff;
+      padding: 20px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 8px;
+    }
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 15px;
+    }
+    .portfolio-item {
+      background: #fafafa;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      overflow: hidden;
+      text-align: center;
+    }
+    .portfolio-item img {
+      width: 100%;
+      height: auto;
+    }
+    .portfolio-item p {
+      margin: 10px 0;
+      font-size: 0.9em;
+      color: #555;
+    }
+    @media (max-width: 768px) {
+      .container { flex-direction: column; }
+      .toggle-options { font-size: 20px; padding: 10px 0; }
+      .filter-button { font-size: 1.1em; }
+    }
+  </style>
 </head>
 <body>
- <header><h1>Wajdi Sfar Work</h1></header>
- <div class="container">
-   <div class="filter-section">
-     <button class="toggle-options">📅 <span>Date</span></button>
-     <div class="filter-list">
-       <p class="filter-button active" data-filter="all">All</p>
-       <p class="filter-button" data-filter="one">21-05-2025</p>
-       <p class="filter-button" data-filter="two">23-05-2025</p>
-       <p class="filter-button" data-filter="three">29-05-2025</p>
-       <p class="filter-button" data-filter="four">31-05-2025</p>
-     </div>
-   </div>
-   <div class="portfolio">
-     <div class="portfolio-grid" id="portfolioGrid">
-        <div class="portfolio">
-        <div class="portfolio-item" data-category="one">
+  <header><h1>Wajdi Sfar Work</h1></header>
+
+  <div class="container">
+    <div class="filter-section">
+      <button class="toggle-options">📅 <span>Date</span></button>
+      <div class="filter-list">
+        <p id="imageCount">Total images: ...</p>
+        <p class="filter-button active" data-filter="all">All</p>
+        <p class="filter-button" data-filter="one">21-05-2025</p>
+        <p class="filter-button" data-filter="two">23-05-2025</p>
+        <p class="filter-button" data-filter="three">29-05-2025</p>
+        <p class="filter-button" data-filter="four">31-05-2025</p>
+      </div>
+    </div>
+
+    <div class="portfolio">
+      <div class="portfolio-grid" id="portfolioGrid">
+        <!-- Portfolio items start -->
+       <div class="portfolio-item" data-category="one">
           <img src="images/21-05-2025/7.png" alt="Project 1" />
           <p>7</p>
         </div>
@@ -119,57 +207,59 @@
           <img src="images/Baklawa Louz.webp" alt="Project 6" />
           <p>Project Three B</p>
         </div>
+        <!-- Portfolio items end -->
       </div>
     </div>
-     </div>
-   </div>
- </div>
- <script>
-   document.addEventListener('DOMContentLoaded', () => {
-     const toggleBtn = document.querySelector('.toggle-options');
-     const filterList = document.querySelector('.filter-list');
-     const filterButtons = document.querySelectorAll('.filter-button');
-     const portfolioGrid = document.getElementById('portfolioGrid');
-     const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+  </div>
 
-     function shuffleArray(array) {
-       for (let i = array.length - 1; i > 0; i--) {
-         const j = Math.floor(Math.random() * (i + 1));
-         [array[i], array[j]] = [array[j], array[i]];
-       }
-       return array;
-     }
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const toggleBtn = document.querySelector('.toggle-options');
+      const filterList = document.querySelector('.filter-list');
+      const filterButtons = document.querySelectorAll('.filter-button');
+      const portfolioGrid = document.getElementById('portfolioGrid');
+      const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
+      const countEl = document.getElementById('imageCount');
 
-     function renderItems(items) {
-       portfolioGrid.innerHTML = '';
-       items.forEach(item => portfolioGrid.appendChild(item));
-     }
+      function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+      }
 
-     function showAllRandom() {
-       const shuffled = shuffleArray([...portfolioItems]);
-       renderItems(shuffled);
-     }
+      function renderItems(items) {
+        portfolioGrid.innerHTML = '';
+        items.forEach(item => portfolioGrid.appendChild(item));
+      }
 
-     toggleBtn.addEventListener('click', () => {
-       filterList.classList.toggle('show');
-     });
+      function showAllRandom() {
+        const shuffled = shuffleArray([...portfolioItems]);
+        renderItems(shuffled);
+      }
 
-     filterButtons.forEach(button => {
-       button.addEventListener('click', () => {
-         filterButtons.forEach(btn => btn.classList.remove('active'));
-         button.classList.add('active');
-         const selected = button.getAttribute('data-filter');
-         if (selected === 'all') {
-           showAllRandom();
-         } else {
-           const filtered = portfolioItems.filter(item => item.dataset.category === selected);
-           renderItems(filtered);
-         }
-       });
-     });
+      toggleBtn.addEventListener('click', () => {
+        filterList.classList.toggle('show');
+      });
 
-     showAllRandom();
-   });
- </script>
+      filterButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          filterButtons.forEach(btn => btn.classList.remove('active'));
+          button.classList.add('active');
+          const selected = button.getAttribute('data-filter');
+          if (selected === 'all') {
+            showAllRandom();
+          } else {
+            const filtered = portfolioItems.filter(item => item.dataset.category === selected);
+            renderItems(filtered);
+          }
+        });
+      });
+
+      countEl.textContent = `Total images: ${portfolioItems.length}`;
+      showAllRandom();
+    });
+  </script>
 </body>
 </html>
