@@ -5,18 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Wajdi Sfar Work</title>
   <style>
-    * { box-sizing: border-box; }
+    /* ===========================
+       1) DARK MODE BASE STYLES
+       =========================== */
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
       font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      color: #333;
+      background: #121212;
+      color: #e0e0e0;
     }
     header {
       text-align: center;
       padding: 40px 0;
-      background: #fff;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      background: #1e1e1e;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
       position: sticky;
       top: 0;
       z-index: 10;
@@ -24,8 +29,31 @@
     header h1 {
       margin: 0;
       font-size: 2.5em;
-      color: #000;
+      color: #ffffff;
     }
+
+    /* Back-to-top button */
+    #backToTop {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: #03a9f4;
+      color: #fff;
+      border: none;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      font-size: 1.5em;
+      cursor: pointer;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    #backToTop:hover {
+      background: #0288d1;
+    }
+
     .container {
       max-width: 1200px;
       margin: 20px auto;
@@ -36,9 +64,9 @@
     .filter-section {
       flex: 1;
       min-width: 200px;
-      background: #fff;
+      background: #1e1e1e;
       padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
       border-radius: 8px;
     }
     .toggle-options {
@@ -46,43 +74,84 @@
       border: none;
       font-size: 24px;
       cursor: pointer;
-      color: #000;
+      color: #ffffff;
       display: flex;
+      justify-content: center;
       gap: 10px;
+      width: 100%;
+    }
+    .toggle-options span {
+      font-size: 1em;
     }
     .filter-list {
       margin-top: 15px;
       display: none;
       flex-direction: column;
-      gap: 5px;
+      gap: 8px;
     }
     .filter-list.show {
       display: flex;
     }
-    .filter-button {
-      padding: 10px 15px;
-      background: #e0f7fa;
+    .filter-button, .filter-month {
+      padding: 8px 12px;
+      background: #2a2a2a;
       border-radius: 50px;
       cursor: pointer;
       text-align: center;
       font-weight: bold;
-      color: #00796b;
+      color: #e0e0e0;
+      transition: background 0.2s, color 0.2s;
+      margin-left: 10px;
+      width: calc(100% - 20px);
     }
-    .filter-button.active {
-      background: #00796b;
-      color: #fff;
+    .filter-button.active,
+    .filter-month.active {
+      background: #03a9f4;
+      color: #121212;
     }
+    .filter-month {
+      font-size: 1.2em;
+      color: #03a9f4;
+      margin-top: 12px;
+      margin-bottom: 4px;
+    }
+    .month-group {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      margin-left: 20px;
+      margin-bottom: 8px;
+    }
+    .filter-day {
+      padding: 8px 12px;
+      background: #2a2a2a;
+      border-radius: 50px;
+      cursor: pointer;
+      text-align: center;
+      font-weight: bold;
+      color: #e0e0e0;
+      transition: background 0.2s, color 0.2s;
+      margin-left: 20px;
+      width: calc(100% - 40px);
+      font-size: 1em;
+    }
+    .filter-day.active {
+      background: #03a9f4;
+      color: #121212;
+    }
+
     #imageCount {
       font-weight: bold;
-      color: #333;
-      margin-bottom: 10px;
+      color: #e0e0e0;
+      margin: 10px 0;
+      text-align: center;
     }
     .portfolio {
       flex: 3;
       min-width: 300px;
-      background: #fff;
+      background: #1e1e1e;
       padding: 20px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
       border-radius: 8px;
     }
     .portfolio-grid {
@@ -91,8 +160,8 @@
       gap: 15px;
     }
     .portfolio-item {
-      background: #fafafa;
-      border: 1px solid #ddd;
+      background: #2a2a2a;
+      border: 1px solid #333;
       border-radius: 6px;
       overflow: hidden;
       text-align: center;
@@ -100,123 +169,206 @@
     .portfolio-item img {
       width: 100%;
       height: auto;
+      display: block;
     }
     .portfolio-item p {
       margin: 10px 0;
       font-size: 0.9em;
-      color: #555;
+      color: #e0e0e0;
     }
+
+    /* ===========================
+       2) RESPONSIVE & CENTERING
+       =========================== */
     @media (max-width: 768px) {
-      .container { flex-direction: column; }
-      .toggle-options { font-size: 20px; padding: 10px 0; }
-      .filter-button { font-size: 1.1em; }
+      .container {
+        flex-direction: column;
+      }
+      .toggle-options {
+        font-size: 20px;
+        padding: 10px 0;
+        margin: 0 auto;
+      }
+      #imageCount {
+        text-align: center;
+      }
+      .filter-button, .filter-month {
+        width: auto;
+        margin-left: 0;
+      }
+      .month-group {
+        margin-left: 10px;
+      }
+      .filter-day {
+        width: auto;
+        margin-left: 10px;
+      }
+    }
+    @media (max-width: 500px) {
+      header h1 {
+        font-size: 2em;
+      }
+      .toggle-options {
+        font-size: 24px;
+      }
     }
   </style>
 </head>
 <body>
-  <header><h1>Wajdi Sfar Work</h1></header>
+  <!-- Header -->
+  <header id="top">
+    <h1>Wajdi Sfar Work</h1>
+  </header>
 
   <div class="container">
+    <!-- Filter Section -->
     <div class="filter-section">
       <button class="toggle-options">📅 <span>Date</span></button>
       <div class="filter-list">
         <p id="imageCount">Total images: ...</p>
+
+        <!-- "All" Filter -->
         <p class="filter-button active" data-filter="all">All</p>
-        <p class="filter-button" data-filter="one">21-05-2025</p>
-        <p class="filter-button" data-filter="two">23-05-2025</p>
-        <p class="filter-button" data-filter="three">29-05-2025</p>
-        <p class="filter-button" data-filter="four">31-05-2025</p>
+
+        <!-- May 2025 -->
+        <p class="filter-month" data-month="05-2025">May 2025</p>
+        <div class="month-group">
+          <p class="filter-day" data-filter="21-05-2025">21-05-2025</p>
+          <p class="filter-day" data-filter="23-05-2025">23-05-2025</p>
+          <p class="filter-day" data-filter="29-05-2025">29-05-2025</p>
+          <p class="filter-day" data-filter="31-05-2025">31-05-2025</p>
+        </div>
+
+        <!-- Juin 2025 (example entries) -->
+        
+        <p class="filter-month" data-month="06-2025">Juin 2025</p>
+        <div class="month-group">
+          <p class="filter-day" data-filter="05-06-2025">05-06-2025</p>
+          <!-- <p class="filter-day" data-filter="12-06-2025">day 02</p>
+          <p class="filter-day" data-filter="20-06-2025">day 03</p> -->
+        </div>
+       
+
+        <!-- July 2025 (example entries) -->
+        
+        <p class="filter-month" data-month="07-2025">July 2025</p>
+        <div class="month-group">
+          <p class="filter-day" data-filter="03-07-2025">03-07-2025</p>
+          <!-- <p class="filter-day" data-filter="15-07-2025">day 02</p>
+          <p class="filter-day" data-filter="28-07-2025">day 03</p> -->
+        </div>
+       
       </div>
     </div>
 
+    <!-- Portfolio Section -->
     <div class="portfolio">
       <div class="portfolio-grid" id="portfolioGrid">
         <!-- Portfolio items start -->
-       <div class="portfolio-item" data-category="one">
-          <img src="images/21-05-2025/7.png" alt="Project 1" />
+        <div class="portfolio-item" data-category="21-05-2025">
+          <img src="images/21-05-2025/7.png" alt="7" />
           <p>7</p>
         </div>
-         <div class="portfolio-item" data-category="one">
-          <img src="images/21-05-2025/face-04.png" alt="Project 1" />
+        <div class="portfolio-item" data-category="21-05-2025">
+          <img src="images/21-05-2025/face-04.png" alt="face-04" />
           <p>face-04</p>
         </div>
-         <div class="portfolio-item" data-category="one">
-          <img src="images/21-05-2025/money.png" alt="Project 1" />
+        <div class="portfolio-item" data-category="21-05-2025">
+          <img src="images/21-05-2025/money.png" alt="money" />
           <p>money</p>
-        </div> <div class="portfolio-item" data-category="one">
-          <img src="images/21-05-2025/leo.png" alt="Project 1" />
+        </div>
+        <div class="portfolio-item" data-category="21-05-2025">
+          <img src="images/21-05-2025/leo.png" alt="leo" />
           <p>leo</p>
-        </div> <div class="portfolio-item" data-category="one">
-          <img src="images/21-05-2025/God.png" alt="Project 1" />
+        </div>
+        <div class="portfolio-item" data-category="21-05-2025">
+          <img src="images/21-05-2025/God.png" alt="God" />
           <p>God</p>
         </div>
-        <div class="portfolio-item" data-category="two">
-          <img src="images/23-05-2025/face-01.png" alt="Project 2" />
+
+        <div class="portfolio-item" data-category="23-05-2025">
+          <img src="images/23-05-2025/face-01.png" alt="face-01" />
           <p>face-01</p>
         </div>
-         <div class="portfolio-item" data-category="two">
-          <img src="images/23-05-2025/face-02.png" alt="Project 2" />
+        <div class="portfolio-item" data-category="23-05-2025">
+          <img src="images/23-05-2025/face-02.png" alt="face-02" />
           <p>face-02</p>
-        </div> <div class="portfolio-item" data-category="two">
-          <img src="images/23-05-2025/face-03.png" alt="Project 2" />
+        </div>
+        <div class="portfolio-item" data-category="23-05-2025">
+          <img src="images/23-05-2025/face-03.png" alt="face-03" />
           <p>face-03</p>
-        </div> <div class="portfolio-item" data-category="two">
-          <img src="images/23-05-2025/head.png" alt="Project 2" />
+        </div>
+        <div class="portfolio-item" data-category="23-05-2025">
+          <img src="images/23-05-2025/head.png" alt="head" />
           <p>head</p>
-        </div> <div class="portfolio-item" data-category="two">
-          <img src="images/23-05-2025/Rose.png" alt="Project 2" />
+        </div>
+        <div class="portfolio-item" data-category="23-05-2025">
+          <img src="images/23-05-2025/Rose.png" alt="Rose" />
           <p>Rose</p>
-        </div> <div class="portfolio-item" data-category="two">
-          <img src="images/23-05-2025/Shelbi.png" alt="Project 2" />
+        </div>
+        <div class="portfolio-item" data-category="23-05-2025">
+          <img src="images/23-05-2025/Shelbi.png" alt="Shelbi" />
           <p>Shelbi</p>
-        </div> <div class="portfolio-item" data-category="two">
-          <img src="images/23-05-2025/V.png" alt="Project 2" />
+        </div>
+        <div class="portfolio-item" data-category="23-05-2025">
+          <img src="images/23-05-2025/V.png" alt="V" />
           <p>V</p>
-        <div class="portfolio-item" data-category="three">
-          <img src="images/29-05-2025/Ghali.png" alt="Project 3" />
+        </div>
+
+        <div class="portfolio-item" data-category="29-05-2025">
+          <img src="images/29-05-2025/Ghali.png" alt="Ghali" />
           <p>Ghali</p>
         </div>
-        <div class="portfolio-item" data-category="three">
-          <img src="images/29-05-2025/Pablo.png" alt="Project 3" />
+        <div class="portfolio-item" data-category="29-05-2025">
+          <img src="images/29-05-2025/Pablo.png" alt="Pablo" />
           <p>Pablo</p>
         </div>
-        <div class="portfolio-item" data-category="three">
-          <img src="images/29-05-2025/tiger.png" alt="Project 3" />
+        <div class="portfolio-item" data-category="29-05-2025">
+          <img src="images/29-05-2025/tiger.png" alt="tiger" />
           <p>tiger</p>
         </div>
-        <div class="portfolio-item" data-category="four">
-          <img src="images/31-05-2025/lips.png" alt="Project 4" />
+
+        <div class="portfolio-item" data-category="31-05-2025">
+          <img src="images/31-05-2025/lips.png" alt="lips" />
           <p>lips</p>
         </div>
-          <div class="portfolio-item" data-category="four">
-          <img src="images/31-05-2025/Made.png" alt="Project 4" />
+        <div class="portfolio-item" data-category="31-05-2025">
+          <img src="images/31-05-2025/Made.png" alt="Made" />
           <p>Made</p>
         </div>
-          <div class="portfolio-item" data-category="four">
-          <img src="images/31-05-2025/World.png" alt="Project 4" />
+        <div class="portfolio-item" data-category="31-05-2025">
+          <img src="images/31-05-2025/World.png" alt="World" />
           <p>World</p>
         </div>
-        <div class="portfolio-item" data-category="five">
-          <img src="images/dattes-farcies.webp" alt="Project 5" />
-          <p>Project Two B</p>
+
+        <div class="portfolio-item" data-category="03-07-2025">
+          <img src="images/dattes-farcies.webp" alt="Dattes Farcies" />
+          <p>Dattes Farcies</p>
         </div>
-        <div class="portfolio-item" data-category="six">
-          <img src="images/Baklawa Louz.webp" alt="Project 6" />
-          <p>Project Three B</p>
+        <div class="portfolio-item" data-category="05-06-2025">
+          <img src="images/Baklawa Louz.webp" alt="Baklawa Louz" />
+          <p>Baklawa Louz</p>
         </div>
         <!-- Portfolio items end -->
       </div>
     </div>
   </div>
 
+  <!-- Back-to-top button -->
+  <button id="backToTop" aria-label="Back to top">↑</button>
+
   <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const toggleBtn = document.querySelector('.toggle-options');
-      const filterList = document.querySelector('.filter-list');
-      const filterButtons = document.querySelectorAll('.filter-button');
+      const toggleBtn     = document.querySelector('.toggle-options');
+      const filterList    = document.querySelector('.filter-list');
+      const allButton     = document.querySelector('.filter-button[data-filter="all"]');
+      const monthHeaders  = document.querySelectorAll('.filter-month');
+      const monthGroups   = document.querySelectorAll('.month-group');
+      const dayButtons    = document.querySelectorAll('.filter-day');
       const portfolioGrid = document.getElementById('portfolioGrid');
       const portfolioItems = Array.from(document.querySelectorAll('.portfolio-item'));
-      const countEl = document.getElementById('imageCount');
+      const countEl       = document.getElementById('imageCount');
+      const backToTopBtn  = document.getElementById('backToTop');
 
       function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
@@ -236,26 +388,100 @@
         renderItems(shuffled);
       }
 
+      // Toggle entire filter list visibility
       toggleBtn.addEventListener('click', () => {
         filterList.classList.toggle('show');
       });
 
-      filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-          filterButtons.forEach(btn => btn.classList.remove('active'));
-          button.classList.add('active');
-          const selected = button.getAttribute('data-filter');
-          if (selected === 'all') {
-            showAllRandom();
-          } else {
-            const filtered = portfolioItems.filter(item => item.dataset.category === selected);
-            renderItems(filtered);
-          }
+      // "All" button logic
+      allButton.addEventListener('click', () => {
+        // Clear active states
+        document
+          .querySelectorAll('.filter-button.active, .filter-month.active, .filter-day.active')
+          .forEach(el => el.classList.remove('active'));
+
+        // Close all month groups
+        monthGroups.forEach(group => (group.style.display = 'none'));
+
+        allButton.classList.add('active');
+        showAllRandom();
+      });
+
+      // Month header click: toggle display of days and filter by month
+      monthHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+          // Clear active states
+          document
+            .querySelectorAll('.filter-button.active, .filter-month.active, .filter-day.active')
+            .forEach(el => el.classList.remove('active'));
+
+          // Close other month groups
+          monthGroups.forEach(group => {
+            if (group !== header.nextElementSibling) {
+              group.style.display = 'none';
+            }
+          });
+
+          // Toggle this month’s group
+          const group = header.nextElementSibling;
+          group.style.display = group.style.display === 'flex' ? 'none' : 'flex';
+
+          header.classList.add('active');
+
+          // Filter by month code ("MM-YYYY")
+          const monthCode = header.getAttribute('data-month');
+          const filtered = portfolioItems.filter(item => {
+            const date = item.getAttribute('data-category'); // "DD-MM-YYYY"
+            return date.endsWith(monthCode);
+          });
+          renderItems(filtered);
         });
       });
 
+      // Day button click: filter by exact date, close other month groups
+      dayButtons.forEach(button => {
+        button.addEventListener('click', () => {
+          // Clear active states
+          document
+            .querySelectorAll('.filter-button.active, .filter-month.active, .filter-day.active')
+            .forEach(el => el.classList.remove('active'));
+
+          // Close all month groups except this one
+          monthGroups.forEach(group => {
+            group.style.display =
+              group.contains(button) ? 'flex' : 'none';
+          });
+
+          // Activate this day button and its parent month header
+          button.classList.add('active');
+          const parentGroup = button.closest('.month-group');
+          const parentHeader = parentGroup.previousElementSibling;
+          parentHeader.classList.add('active');
+
+          // Filter by exact "DD-MM-YYYY"
+          const selectedDate = button.getAttribute('data-filter');
+          const filtered = portfolioItems.filter(item =>
+            item.getAttribute('data-category') === selectedDate
+          );
+          renderItems(filtered);
+        });
+      });
+
+      // Update total image count
       countEl.textContent = `Total images: ${portfolioItems.length}`;
+
+      // Show all shuffled on initial load
       showAllRandom();
+
+      // Show/hide back-to-top button on scroll
+      window.addEventListener('scroll', () => {
+        backToTopBtn.style.display = window.pageYOffset > 300 ? 'flex' : 'none';
+      });
+
+      // Scroll to top on button click
+      backToTopBtn.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
     });
   </script>
 </body>
